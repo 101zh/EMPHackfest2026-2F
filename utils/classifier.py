@@ -8,7 +8,7 @@ image_folder = Path(__file__).parent.parent / "speciesnet-input"
 output_file = Path(__file__).parent / "output.json"
 
 
-def get_animal(country_code) :
+def get_animal(country_code="") :
     # Delete old output.json (SpeciesNet throws error otherwise)
     if output_file.exists():
         output_file.unlink()
