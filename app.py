@@ -1,5 +1,5 @@
 import io
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 from PIL import Image
 import sqlite3
 import os
@@ -14,6 +14,21 @@ def get_db():
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
     return conn
+
+
+@app.route("/")
+def home():
+    return render_template("index.html")
+
+
+@app.route("/mission/")
+def mission():
+    return render_template("mission/index.html")
+
+
+@app.route("/animal-detector/")
+def animal_detector():
+    return render_template("animal-detector/index.html")
 
 
 @app.route("/init", methods=["GET"])
@@ -54,7 +69,7 @@ def add_animal():
 
 @app.route("/identify", methods=["POST"])
 def identify_animal():
-    file = request.files.get('image')
+    file = request.files.get("image")
     if file:
         file.save("speciesnet-input/temp.jpg")
         print("Obtained Image!")
@@ -62,7 +77,10 @@ def identify_animal():
         print("No image obtained")
         return jsonify({"message": "No image obtained"}), 400
 
-    return jsonify({"message": "Work in Progress", "animal": "", "animal_data": ""}), 200
+    return (
+        jsonify({"message": "Work in Progress", "animal": "", "animal_data": ""}),
+        200,
+    )
 
 
 if __name__ == "__main__":
