@@ -1,3 +1,5 @@
 animals.db
 speciesnet-input/*
 .env
+*.pyc
+__pychache__/
