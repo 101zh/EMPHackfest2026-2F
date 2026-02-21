@@ -3,3 +3,4 @@ speciesnet-input/*
 .env
 *.pyc
 __pychache__/
+output.json
