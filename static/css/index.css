@@ -1,8 +1,31 @@
 body {
-    font-family: "Noto Sans", sans-serif;
+    font-family: "Noto Sans", serif, sans-serif, sans-serif;
     font-optical-sizing: auto;
     font-weight: 500;
     font-style: normal;
     font-variation-settings:
         "wdth" 100;
+
+    padding: 0rem;
+    margin: 0rem;
+    background-color: #5d3b39;
+}
+
+.header {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 8rem;
+    font-weight: 400;
+    font-variation-settings:
+        "wdth" 62.5;
+    color: #aef5b4;
+}
+
+.subscript{
+    font-size: 2rem;
+    color: #aef5b4;
 }

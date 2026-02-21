@@ -6,19 +6,25 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wdth,wght@0,62.5..100,100..900;1,62.5..100,100..900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
 
     <nav id="navbar">
-        <a class="navButton" id="logo" href="">HOME</a>
-        <a class="navButton" href="">tab3</a>
+        <a class="navButton" id="logo" href=""><img id="logoImage"
+                src="{{ url_for('static', filename='assets/logo.svg') }}" alt="Paw Image"></a>
         <a class="navButton" href="animaldex/">AnimalDex</a>
         <a class="navButton" href="animal-detector/">Animal Detector</a>
         <a class="navButton" href="mission/">Mission</a>
     </nav>
 
-    <div id="header">
+    <div class="header">
         <div class="title">Wildlife Conservation</div>
         <div class="subscript">A mission of the people</div>
     </div>
