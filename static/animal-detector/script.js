@@ -1,8 +1,17 @@
 const fileInput = document.getElementById("animal-pic-file");
+const imagePreview = document.getElementById("image-preview");
 
 window.addEventListener('paste', e => {
     fileInput.files = e.clipboardData.files;
 });
+
+fileInput.onchange = previewImage;
+
+function previewImage() {
+    if (fileInput.files && fileInput.files[0]) {
+        imagePreview.src = URL.createObjectURL(fileInput.files[0])
+    }
+}
 
 document.getElementById("send").addEventListener("click", function () {
     if (fileInput.files && fileInput.files[0]) {

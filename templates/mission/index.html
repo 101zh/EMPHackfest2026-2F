@@ -3,8 +3,8 @@
 
 <head>
     <title>Insert Website Title</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='mission/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
 </head>
 
 <body>
@@ -24,6 +24,6 @@
 
 </body>
 
-<script src="script.js"></script>
+<script src="{{ url_for('static', filename='mission/script.js') }}"></script>
 
 </html>

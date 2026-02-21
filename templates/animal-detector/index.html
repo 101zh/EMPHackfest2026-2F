@@ -3,8 +3,8 @@
 
 <head>
     <title>Insert Website Title</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='animal-detector/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
 </head>
 
 <body>
@@ -23,10 +23,11 @@
     </div>
 
     <input type="file" id="animal-pic-file" accept="image/png, image/jpeg" />
+    <img id="image-preview" src="#" alt="the uploaded image" />
     <button id="send">Send Image</button>
 
 </body>
 
-<script src="script.js"></script>
+<script src="{{ url_for('static', filename='animal-detector/script.js') }}"></script>
 
 </html>
