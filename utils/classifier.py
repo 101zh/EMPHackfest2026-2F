@@ -4,11 +4,11 @@ import sys
 import json
 
 # Paths for images and classifier output
-image_folder = Path(r"..\speciesnet-input")
-output_file = Path(r".\\output.json")
+image_folder = Path(__file__).parent.parent / "speciesnet-input"
+output_file = Path(__file__).parent / "output.json"
 
 
-def getAnimal() :
+def get_animal() :
     # Delete old output.json (SpeciesNet throws error otherwise)
     if output_file.exists():
         output_file.unlink()
@@ -36,6 +36,8 @@ def getAnimal() :
     with open(str(output_file)) as json_data:
         output_json = json.load(json_data)
         json_data.close()
+
+    print(output_json)
 
     # Gets the most confident animal classification data
     classification = output_json["predictions"][0]["classifications"]["classes"][0] 

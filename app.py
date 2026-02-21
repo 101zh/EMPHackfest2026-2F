@@ -1,5 +1,7 @@
 import io
 from flask import Flask, jsonify, request, render_template
+from utils.gemini_api import get_species_information
+from utils.classifier import get_animal
 from PIL import Image
 import sqlite3
 import os
@@ -82,8 +84,16 @@ def identify_animal():
         print("No image obtained")
         return jsonify({"message": "No image obtained"}), 400
 
+
+    animal = get_animal()
+    location = "World"
+    info = get_species_information(animal, location)
+
+    print(animal)
+    print(info)
+
     return (
-        jsonify({"message": "Work in Progress", "animal": "", "animal_data": ""}),
+        jsonify({"message": "Animal identified", "animal": animal, "animal_data": info}),
         200,
     )
 

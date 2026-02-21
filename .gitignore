@@ -1,6 +1,7 @@
 animals.db
-templates/speciesnet-input/*
+speciesnet-input/*
 .env
 *.pyc
 __pychache__/
 output.json
+.vscode/*
