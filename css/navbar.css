@@ -1,0 +1,19 @@
+/* Navigation Bar Stuff */
+
+.navButton {
+    text-decoration: none;
+    color: black;
+    padding: 1rem;
+}
+
+#logo {
+    margin-right: auto;
+    align-self: inherit;
+}
+
+#navbar {
+    display: flex;
+    flex-direction: row;
+    max-height: 5rem;
+}
+
