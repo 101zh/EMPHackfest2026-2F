@@ -1,4 +1,6 @@
+import io
 from flask import Flask, jsonify, request
+from PIL import Image
 import sqlite3
 import os
 
@@ -52,7 +54,14 @@ def add_animal():
 
 @app.route("/identify", methods=["POST"])
 def identify_animal():
-    # TODO
+    file = request.files.get('image')
+    if file:
+        file.save("speciesnet-input/temp.jpg")
+        print("Obtained Image!")
+    else:
+        print("No image obtained")
+        return jsonify({"message": "No image obtained"}), 400
+
     return jsonify({"message": "Work in Progress", "animal": "", "animal_data": ""}), 200
 
 

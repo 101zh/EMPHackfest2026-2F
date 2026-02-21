@@ -13,10 +13,10 @@ document.getElementById("send").addEventListener("click", function () {
 function upload(file) {
     console.log(file)
     var formdata = new FormData();
-    formdata.append("test", file);
+    formdata.append("image", file);
 
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://localhost:5000/", true);
+    xhr.open("POST", "http://localhost:5000/identify", true);
     xhr.onload = function () {
         if (this.status = 200) {
             console.log(this.response);
