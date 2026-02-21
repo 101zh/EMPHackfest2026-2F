@@ -71,6 +71,8 @@ def add_animal():
 def identify_animal():
     file = request.files.get("image")
     if file:
+        if not os.path.exists("speciesnet-input"):
+            os.makedirs("speciesnet-input")
         file.save("speciesnet-input/temp.jpg")
         print("Obtained Image!")
     else:
