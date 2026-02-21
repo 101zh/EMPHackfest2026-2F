@@ -84,6 +84,7 @@ def identify_animal():
 
 
 if __name__ == "__main__":
+    app.static_folder = "static"
     with app.app_context():
         init_db()
     app.run(debug=True)
