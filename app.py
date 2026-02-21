@@ -1,4 +1,5 @@
 import io
+import json
 from flask import Flask, jsonify, request, render_template
 from utils.gemini_api import get_species_information
 from utils.classifier import get_animal
@@ -32,9 +33,11 @@ def mission():
 def animal_detector():
     return render_template("animal-detector/index.html")
 
+
 @app.route("/animaldex/")
 def animaldex():
     return render_template("animaldex/index.html")
+
 
 @app.route("/init", methods=["GET"])
 def init_db():
@@ -43,7 +46,8 @@ def init_db():
         """
         CREATE TABLE IF NOT EXISTS animals(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL
+        name TEXT NOT NULL,
+        info TEXT NOT NULL
         )
         """
     )
@@ -64,8 +68,9 @@ def get_animals():
 @app.route("/animals", methods=["POST"])
 def add_animal():
     animal = request.get_json().get("animal")
+    info = request.get_json().get("info")
     conn = get_db()
-    conn.execute("INSERT INTO animals (name) VALUES (?)", (animal,))
+    conn.execute("INSERT INTO animals (name, info) VALUES (?)", (animal, info))
     conn.commit()
     conn.close()
 
@@ -84,7 +89,6 @@ def identify_animal():
         print("No image obtained")
         return jsonify({"message": "No image obtained"}), 400
 
-
     animal = get_animal()
     location = "World"
     info = get_species_information(animal, location)
@@ -92,8 +96,17 @@ def identify_animal():
     print(animal)
     print(info)
 
+    conn = get_db()
+    conn.execute(
+        "INSERT INTO animals (name, info) VALUES (?, ?)", (animal, json.dumps(info))
+    )
+    conn.commit()
+    conn.close()
+
     return (
-        jsonify({"message": "Animal identified", "animal": animal, "animal_data": info}),
+        jsonify(
+            {"message": "Animal identified", "animal": animal, "animal_data": info}
+        ),
         200,
     )
 
