@@ -7,12 +7,8 @@ import json
 image_folder = Path(__file__).parent.parent / "speciesnet-input"
 output_file = Path(__file__).parent / "output.json"
 
-<<<<<<< HEAD:utils/classifier.py
 
-def get_animal() :
-=======
-def getAnimal(country_code) :
->>>>>>> 9bac3a5 (Added country code to classification):animal-classifier/classifier.py
+def get_animal(country_code) :
     # Delete old output.json (SpeciesNet throws error otherwise)
     if output_file.exists():
         output_file.unlink()
