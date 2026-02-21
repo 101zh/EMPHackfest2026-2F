@@ -3,7 +3,7 @@
 
 <head>
     <title>Insert Website Title</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='animal-detector/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='animaldex/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
 </head>
 
@@ -19,15 +19,11 @@
 
     <div id="header">
         <div class="title">Wildlife Conservation</div>
-        <div class="subscript">The animal detection tool</div>
+        <div class="subscript">See the animals you've collected!</div>
     </div>
-
-    <input type="file" id="animal-pic-file" accept="image/png, image/jpeg" />
-    <img id="image-preview" src="#" alt="the uploaded image" />
-    <button id="send">Send Image</button>
 
 </body>
 
-<script src="{{ url_for('static', filename='animal-detector/script.js') }}"></script>
+<script src="{{ url_for('static', filename='animaldex/script.js') }}"></script>
 
 </html>

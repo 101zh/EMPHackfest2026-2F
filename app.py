@@ -30,6 +30,9 @@ def mission():
 def animal_detector():
     return render_template("animal-detector/index.html")
 
+@app.route("/animaldex/")
+def animaldex():
+    return render_template("animaldex/index.html")
 
 @app.route("/init", methods=["GET"])
 def init_db():
