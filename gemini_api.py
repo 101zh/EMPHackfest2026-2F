@@ -36,9 +36,10 @@ def get_species_information(species, location):
             response_dict = json.loads(response.text)
 
             for key in JSON_KEYS:
-                assert response_dict[key] != None
+                if response_dict.get(key) == None:
+                    raise ValueError(f'"{key}" does not exist in response')
 
-            return response
+            return response_dict
         except Exception as e:
             print(e)
             time.sleep(2)
