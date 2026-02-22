@@ -11,7 +11,9 @@ async function loadAnimals() {
             card.className = 'animal-card';
 
             card.innerHTML = `
-                <img src="data:${animal.image_type};base64,${animal.image}" alt="${animal.name}">
+                <div class="animal-card-image-container">
+                    <img src="data:${animal.image_type};base64,${animal.image}" alt="${animal.name}">
+                </div>
                 <h3>${animal.name}</h3>
             `;
 
