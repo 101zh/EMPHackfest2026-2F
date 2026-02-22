@@ -1,3 +1,4 @@
+import base64
 import io
 import json
 from flask import Flask, jsonify, request, render_template
@@ -47,7 +48,9 @@ def init_db():
         CREATE TABLE IF NOT EXISTS animals(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
-        info TEXT NOT NULL
+        info TEXT NOT NULL,
+        image BLOB NOT NULL,
+        image_type TEXT NOT NULL
         )
         """
     )
@@ -62,19 +65,20 @@ def get_animals():
     conn = get_db()
     rows = conn.execute("SELECT * FROM animals").fetchall()
     conn.close()
-    return jsonify([dict(row) for row in rows])
 
+    animals = []
+    for row in rows:
+        animals.append(
+            {
+                "id": row["id"],
+                "name": row["name"],
+                "info": json.loads(row["info"]),
+                "image": base64.b64encode(row["image"]).decode("utf-8"),
+                "image_type": row["image_type"]
+            }
+        )
 
-@app.route("/animals", methods=["POST"])
-def add_animal():
-    animal = request.get_json().get("animal")
-    info = request.get_json().get("info")
-    conn = get_db()
-    conn.execute("INSERT INTO animals (name, info) VALUES (?)", (animal, info))
-    conn.commit()
-    conn.close()
-
-    return jsonify({"message": "Added animal to database", "name": animal}), 201
+    return jsonify(animals)
 
 
 @app.route("/identify", methods=["POST"])
@@ -89,6 +93,9 @@ def identify_animal():
         print("No image obtained")
         return jsonify({"message": "No image obtained"}), 400
 
+    file.seek(0)
+    image_bytes = file.read()
+
     animal = get_animal()
     location = "World"
     info = get_species_information(animal, location)
@@ -98,15 +105,14 @@ def identify_animal():
 
     conn = get_db()
     conn.execute(
-        "INSERT INTO animals (name, info) VALUES (?, ?)", (animal, json.dumps(info))
+        "INSERT INTO animals (name, info, image, image_type) VALUES (?, ?, ?, ?)",
+        (animal, json.dumps(info), image_bytes, file.content_type),
     )
     conn.commit()
     conn.close()
 
     return (
-        jsonify(
-            {"message": "Animal identified", "animal": animal, "animal_data": info}
-        ),
+        jsonify({"message": "Animal identified", "name": animal, "animal_data": info}),
         200,
     )
 

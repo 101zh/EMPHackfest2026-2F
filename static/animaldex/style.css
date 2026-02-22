@@ -4,6 +4,7 @@
   gap: 20px;
   padding: 20px;
 }
+
 .animal-card {
     background-color: rgba(255, 255, 255, 0.1);
     border: 2px solid #a8dadc;
@@ -15,7 +16,7 @@
 }
 
 .animal-card:hover {
-    transform: scale(1.05); /* Zoom effect */
+    transform: scale(1.05);
 }
 
 .animal-card img {
@@ -24,7 +25,6 @@
     margin-bottom: 10px;
 }
 
-/* The Modal (background) */
 .modal {
     display: none; 
     position: fixed; 
@@ -34,15 +34,17 @@
     background-color: rgba(0,0,0,0.8);
 }
 
-/* Modal Content Box */
 .modal-content {
-    background-color: #2a1b1b; /* Matching your theme */
+    background-color: #2a1b1b;
     margin: 5% auto;
     padding: 20px;
     border-radius: 20px;
     width: 80%;
     max-width: 600px;
     color: white;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
 }
 
 .close-button {
@@ -52,7 +54,13 @@
 }
 
 .modal-image {
-    width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 67%;
+    max-height: 300px;
+    object-fit: cover;
     border-radius: 15px;
     margin-bottom: 20px;
+    margin-top: 20px;
 }

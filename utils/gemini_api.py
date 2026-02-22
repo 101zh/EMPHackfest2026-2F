@@ -24,6 +24,7 @@ def get_species_information(species, location):
         Use ASCII characters and format as strings without new lines or indentation.
         Make "endangered_status" the string "None" if the species is not listed.
         Make "is_invasive" a boolean, and true if the species is classified as invasive and is in a location where it's not native.
+        Write "fun_facts" in complete sentences.
     """
 
     for i in range(MAX_ATTEMPTS):
