@@ -109,7 +109,7 @@ def login():
     conn.close()
 
     if user:
-        return jsonify({"message": f"Welcome {username}!", "success": True})
+        return jsonify({"message": f"Welcome {username}!", "success": True}), 200
     else:
         return jsonify({"message": "Invalid credentials", "success": False}), 401
 
