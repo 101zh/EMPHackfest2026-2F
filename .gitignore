@@ -5,3 +5,5 @@ speciesnet-input/*
 __pychache__/
 output.json
 .vscode/*
+species_env/
+.DS_Store
