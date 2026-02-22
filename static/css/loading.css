@@ -1,0 +1,53 @@
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(35, 0, 15);
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.loading-overlay.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.loading-text {
+    margin: 0;
+    color: #aef5b4;
+    font-size: clamp(1.4rem, 3vw, 2.3rem);
+    font-weight: 650;
+    letter-spacing: 0.03em;
+}
+
+.dots::after {
+    content: "";
+    animation: loadingDots 1.5s steps(1, end) infinite;
+}
+
+@keyframes loadingDots {
+    0%,
+    24% {
+        content: "";
+    }
+
+    25%,
+    49% {
+        content: ".";
+    }
+
+    50%,
+    74% {
+        content: "..";
+    }
+
+    75%,
+    100% {
+        content: "...";
+    }
+}
