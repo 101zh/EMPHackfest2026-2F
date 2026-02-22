@@ -97,8 +97,15 @@ def identify_animal():
     image_bytes = file.read()
 
     animal = get_animal()
+
+    if animal.lower() == "blank":
+        return jsonify({"message": "No animal identified"}), 400
+
     location = "World"
     info = get_species_information(animal, location)
+
+    if info == None:
+        return jsonify({"message": "API call failed"}), 400
 
     print(animal)
     print(info)
