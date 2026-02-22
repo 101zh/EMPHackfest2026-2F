@@ -7,7 +7,15 @@ import json
 image_folder = Path(__file__).parent.parent / "speciesnet-input"
 output_file = Path(__file__).parent / "output.json"
 
-
+"""
+@article{gadot2024crop,
+  title={To crop or not to crop: Comparing whole-image and cropped classification on a large dataset of camera trap images},
+  author={Gadot, Tomer and Istrate, Ștefan and Kim, Hyungwon and Morris, Dan and Beery, Sara and Birch, Tanya and Ahumada, Jorge},
+  journal={IET Computer Vision},
+  year={2024},
+  publisher={Wiley Online Library}
+}
+"""
 def get_animal(country_code="") :
     # Delete old output.json (SpeciesNet throws error otherwise)
     if output_file.exists():
@@ -23,7 +31,7 @@ def get_animal(country_code="") :
         "speciesnet.scripts.run_model",
         "--classifier_only", # Set to classifier only mode
         "--folders",
-        str(image_folder), # 
+        str(image_folder),
         "--predictions_json",
         str(output_file),
         "--country",
