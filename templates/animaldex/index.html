@@ -24,12 +24,26 @@
         <a class="navButton" href="../mission/">Mission</a>
     </nav>
 
+    <nav id="navbar">
+        </nav>
+
     <div class="header">
         <div class="title">Wildlife Conservation</div>
         <div class="subscript">See the animals you've collected!</div>
     </div>
 
+    <div class="pokedex-grid">
+        </div>
+
 </body>
+
+<div id="animalModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <div id="modal-details">
+            </div>
+    </div>
+</div>
 
 <script src="{{ url_for('static', filename='animaldex/script.js') }}"></script>
 

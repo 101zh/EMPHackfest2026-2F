@@ -1,0 +1,58 @@
+.pokedex-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+.animal-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid #a8dadc;
+    border-radius: 15px;
+    padding: 15px;
+    color: white;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.animal-card:hover {
+    transform: scale(1.05); /* Zoom effect */
+}
+
+.animal-card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.8);
+}
+
+/* Modal Content Box */
+.modal-content {
+    background-color: #2a1b1b; /* Matching your theme */
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 20px;
+    width: 80%;
+    max-width: 600px;
+    color: white;
+}
+
+.close-button {
+    float: right;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.modal-image {
+    width: 100%;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
