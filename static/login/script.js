@@ -39,6 +39,7 @@ async function submitAuth(event) {
     const endpoint = mode === "login" ? "/login" : "/register";
 
     try {
+        // Send POST request to the db with username and password
         const response = await fetch(endpoint, {
             method: "POST",
             headers: {
