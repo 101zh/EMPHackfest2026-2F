@@ -9,7 +9,10 @@ fileInput.onchange = previewImage;
 
 function previewImage() {
     if (fileInput.files && fileInput.files[0]) {
-        imagePreview.src = URL.createObjectURL(fileInput.files[0])
+        imagePreview.style.background = `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(\"${URL.createObjectURL(fileInput.files[0])}\")`
+        imagePreview.style.backgroundPosition = "center"
+        imagePreview.style.backgroundSize = "cover"
+        imagePreview.style.backgroundRepeat = "no-repeat"
     }
 }
 
@@ -28,7 +31,7 @@ function upload(file) {
     xhr.open("POST", "/identify", true);
     xhr.responseType = "json";
     xhr.onload = function () {
-        
+
         if (this.status === 200) {
             const data = this.response;
             console.log(this.response);

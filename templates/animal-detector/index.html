@@ -28,8 +28,13 @@
         <div class="subscript">The animal detection tool</div>
     </div>
 
-    <input type="file" id="animal-pic-file" accept="image/png, image/jpeg" />
-    <img id="image-preview" src="#" alt="the uploaded image" />
+    <div id="image-preview-container">
+        <label for="animal-pic-file" class="file-upload" id="image-preview">
+            Upload File
+        </label>
+        <input type="file" id="animal-pic-file" accept="image/png, image/jpeg" />
+    </div>
+    <!-- <img id="image-preview" src="#" alt="the uploaded image" /> -->
     <button id="send">Send Image</button>
 
     <div class="result-box" id="resultBox" style="display:none;">

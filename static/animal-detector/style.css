@@ -1,11 +1,33 @@
+#image-preview-container {
+    height: 20rem;
+    width: 20rem;
+    margin: 1rem;
+    display: flex;
+}
+
+.file-upload {
+    height: 100%;
+    width: 100%;
+}
+
+.file-upload:hover {
+    transition: 0.25s;
+    filter: brightness(80%);
+}
+
+#animal-pic-file {
+    display: none;
+}
+
 .result-box {
     width: 320px;
     margin-top: 20px;
     padding: 20px;
     border-radius: 8px;
     background-color: white;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    display: none; /* hidden until data arrives */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: none;
+    /* hidden until data arrives */
 }
 
 .result-box h3 {
