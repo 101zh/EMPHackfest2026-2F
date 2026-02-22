@@ -30,6 +30,8 @@
 }
 
 #navbar {
+    position: relative;
+    z-index: 1000;
     display: flex;
     flex-direction: row;
     max-height: 5rem;

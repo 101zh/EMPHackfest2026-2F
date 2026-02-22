@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loading.css') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,6 +24,10 @@
         <a class="navButton" href="animal-detector/">Animal Detector</a>
     </nav>
 
+    <div id="loadingOverlay" class="loading-overlay">
+        <p class="loading-text">Venturing into the Wild<span class="dots"></span></p>
+    </div>
+
     <div id="header" class="header">
         <div class="title">Endangered Species Identifier</div>
         <div class="subscript">The homepage</div>
@@ -31,5 +36,6 @@
 </body>
 
 <script src="{{ url_for('static', filename='script.js') }}"></script>
+<script src="{{ url_for('static', filename='loading.js') }}"></script>
 
 </html>
