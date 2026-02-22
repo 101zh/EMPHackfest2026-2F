@@ -7,7 +7,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(35, 0, 15);
+    background: #351207;
     transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
@@ -19,7 +19,7 @@
 
 .loading-text {
     margin: 0;
-    color: #aef5b4;
+    color: #ffffff;
     font-size: clamp(1.4rem, 3vw, 2.3rem);
     font-weight: 650;
     letter-spacing: 0.03em;

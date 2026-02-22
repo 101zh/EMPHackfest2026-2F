@@ -7,7 +7,7 @@ body {
         "wdth" 100;
     padding: 0rem;
     margin: 0rem;
-    background-color: #5d3b39;
+    background-color: #351207;
 }
 
 .header {
@@ -21,21 +21,21 @@ body {
     font-weight: 400;
     font-variation-settings:
         "wdth" 62.5;
-    color: #aef5b4;
+    color: #ffffff;
 }
 
 .subscript {
     font-size: 2rem;
-    color: #aef5b4;
+    color: #ffffff;
 }
 
 .mission-section {
     margin: 1rem;
     max-width: 100%;
     padding: 1.5rem;
-    border: 2px solid #aef5b4;
+    border: 2px solid #000000;
     border-radius: 0.75rem;
-    background-color: rgba(174, 245, 180, 0.08);
+    background-color: #ffffff;
 }
 
 .mission-section h2 {
@@ -43,7 +43,7 @@ body {
     margin-bottom: 0.75rem;
     font-size: 2.25rem;
     font-weight: 600;
-    color: #aef5b4;
+    color: #000000;
 }
 
 .mission-section p {
@@ -51,5 +51,5 @@ body {
     font-size: 1.2rem;
     max-width: 90%;
     line-height: 1.7;
-    color: #f4efe9;
+    color: #000000;
 }

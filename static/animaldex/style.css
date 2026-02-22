@@ -6,11 +6,11 @@
 }
 
 .animal-card {
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 0.2rem solid #257856;
+    background-color: #ffffff;
+    border: 0.3rem solid #000000;
     border-radius: 1rem;
     padding: 1rem;
-    color: white;
+    color: rgb(0, 0, 0);
     text-align: center;
     transition: transform 0.2s;
 }
@@ -37,7 +37,7 @@
 }
 
 .modal-content {
-    background-color: #2a1b1b;
+    background-color: #351207;
     margin: 5% auto;
     padding: 1.5rem;
     border-radius: 1rem;
