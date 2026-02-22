@@ -1,4 +1,4 @@
-animals.db
+*.db
 speciesnet-input/*
 .env
 *.pyc
