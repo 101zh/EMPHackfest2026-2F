@@ -52,7 +52,7 @@ def init_db():
         info TEXT NOT NULL,
         image BLOB NOT NULL,
         image_type TEXT NOT NULL,
-        username NOT NULL
+        username TEXT NOT NULL
         )
         """
     )
