@@ -33,17 +33,18 @@
             Upload File
         </label>
         <input type="file" id="animal-pic-file" accept="image/png, image/jpeg" />
-        <button id="send">Send Image</button>
-    </div>
-
-    <div class="result-box" id="resultBox" style="display:none;">
-        <h3>Identification Result</h3>
-        <div class="result-item"><strong>Animal:</strong> <span id="name">-</span></div>
-        <div class="result-item"><strong>Endangered Status:</strong> <span id="endangered_status">-</span></div>
-        <div class="result-item"><strong>Is it Invasive:</strong> <span id="is_invasive">-</span></div>
-        <div class="result-item"><strong>Population:</strong> <span id="population_count">-</span></div>
-        <div class="result-item"><strong>Native Region:</strong> <span id="native_region">-</span></div>
-        <div class="result-item"><strong>Fun Facts:</strong> <span id="fun_facts">-</span></div>
+        <div id="send-and-results">
+            <button id="send">Send Image</button>
+            <div class="result-box" id="resultBox">
+                <h3>Identification Result</h3>
+                <div class="result-item"><strong>Animal:</strong> <span id="name">-</span></div>
+                <div class="result-item"><strong>Endangered Status:</strong> <span id="endangered_status">-</span></div>
+                <div class="result-item"><strong>Is it Invasive:</strong> <span id="is_invasive">-</span></div>
+                <div class="result-item"><strong>Population:</strong> <span id="population_count">-</span></div>
+                <div class="result-item"><strong>Native Region:</strong> <span id="native_region">-</span></div>
+                <div class="result-item"><strong>Fun Facts:</strong> <span id="fun_facts">-</span></div>
+            </div>
+        </div>
     </div>
 
 </body>

@@ -1,9 +1,15 @@
+#container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
 .file-upload {
     display: flex;
 
     margin: 1rem;
-    height: 20rem;
-    width: 20rem;
+    height: 50vh;
+    width: 50vw;
 
     color: #aef5b4;
     background: #0f331e;
@@ -20,13 +26,23 @@
     filter: brightness(80%);
 }
 
+#send {
+    height: 5vh;
+}
+
+#send-and-results {
+    margin: 1rem;
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 #animal-pic-file {
     display: none;
 }
 
 .result-box {
-    width: 320px;
-    margin-top: 20px;
     padding: 20px;
     border-radius: 8px;
     background-color: white;
