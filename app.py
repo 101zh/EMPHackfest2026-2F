@@ -1,4 +1,5 @@
 import base64
+import hashlib
 import io
 import json
 from flask import Flask, jsonify, request, render_template
@@ -49,10 +50,69 @@ def init_db():
         )
         """
     )
+    conn.execute(
+        """
+        CREATE TABLE IF NOT EXISTS users(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user TEXT UNIQUE NOT NULL,
+        password TEXT NOT NULL
+        )
+        """
+    )
+
     conn.commit()
     conn.close()
     print("Initialized database")
     return jsonify({"message": "Initialized database"})
+
+
+@app.route("/register", methods=["POST"])
+def register():
+    data = request.get_json()
+    username = data.get("username")
+    password = data.get("password")
+
+    if not username or not password:
+        return jsonify({"error": "Missing username or password"}), 400
+
+    hashed_password = hashlib.sha256(password.encode()).hexdigest()
+
+    try:
+        conn = get_db()
+        conn.execute(
+            "INSERT INTO users (username, password) VALUES (?, ?)",
+            (username, hashed_password),
+        )
+        conn.commit()
+        conn.close()
+        return jsonify({"message": "User registered successfully"}), 201
+    except sqlite3.IntegrityError:
+        conn.close()
+        return jsonify({"error": "Username already exists"}), 409
+    
+
+@app.route("/login", methods=["POST"])
+def login():
+    data = request.get_json()
+    username = data.get("username")
+    password = data.get("password")
+
+    if not username or not password:
+        return jsonify({"message": "Missing username or password", "success": False}), 400
+
+    hashed_password = hashlib.sha256(password.encode()).hexdigest()
+    conn = get_db()
+    user = conn.execute(
+        "SELECT * FROM users WHERE username = ? AND password = ?",
+        (username, hashed_password),
+    ).fetchone()
+    conn.close()
+
+    if user:
+        return jsonify({"message": f"Welcome {username}!", "success": True})
+    else:
+        return jsonify({"message": "Invalid credentials", "success": False}), 401
+
 
 
 @app.route("/animals", methods=["GET"])
@@ -69,7 +129,7 @@ def get_animals():
                 "name": row["name"],
                 "info": json.loads(row["info"]),
                 "image": base64.b64encode(row["image"]).decode("utf-8"),
-                "image_type": row["image_type"]
+                "image_type": row["image_type"],
             }
         )
 
