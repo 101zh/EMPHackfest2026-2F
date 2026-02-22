@@ -15,7 +15,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 def get_db():
-    db_path = os.path.join(BASE_DIR, "animals.db")
+    db_path = os.path.join(BASE_DIR, "user_info.db")
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
     return conn
@@ -35,6 +35,11 @@ def animal_detector():
 def animaldex():
     return render_template("animaldex/index.html")
 
+@app.route("/login/")
+def loadLogin():
+    return render_template("login/index.html")
+
+
 
 @app.route("/init", methods=["GET"])
 def init_db():
@@ -46,7 +51,8 @@ def init_db():
         name TEXT NOT NULL,
         info TEXT NOT NULL,
         image BLOB NOT NULL,
-        image_type TEXT NOT NULL
+        image_type TEXT NOT NULL,
+        username TEXT NOT NULL
         )
         """
     )
@@ -54,7 +60,7 @@ def init_db():
         """
         CREATE TABLE IF NOT EXISTS users(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        user TEXT UNIQUE NOT NULL,
+        username TEXT UNIQUE NOT NULL,
         password TEXT NOT NULL
         )
         """
@@ -172,8 +178,8 @@ def identify_animal():
 
     conn = get_db()
     conn.execute(
-        "INSERT INTO animals (name, info, image, image_type) VALUES (?, ?, ?, ?)",
-        (animal, json.dumps(info), image_bytes, file.content_type),
+        "INSERT INTO animals (name, info, image, image_type, username) VALUES (?, ?, ?, ?, ?)",
+        (animal, json.dumps(info), image_bytes, file.content_type, "temp"),
     )
     conn.commit()
     conn.close()
