@@ -35,10 +35,10 @@ function showDetails(animal) {
     </div>
         <h2>${animal.name}</h2>
         <div class="stats">
-            <p><strong>Status:</strong> ${animal.info.endangered_status}</p>
-            <p><strong>Invasive:</strong> ${animal.info.is_invasive ? 'Yes ⚠️' : 'No'}</p>
+            <p><strong>Endangerment Status:</strong> ${animal.info.endangered_status}</p>
+            <p><strong>Invasiveness:</strong> ${animal.info.is_invasive ? 'Yes ⚠️' : 'No'}</p>
             <p><strong>Population:</strong> ${animal.info.population_count}</p>
-            <p><strong>Region:</strong> ${animal.info.native_region}</p>
+            <p><strong>Native Region:</strong> ${animal.info.native_region}</p>
         </div>
         <hr>
         <p><strong>Fun Facts:</strong> ${animal.info.fun_facts}</p>
