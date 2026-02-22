@@ -37,7 +37,7 @@ def animaldex():
 
 @app.route("/login/")
 def loadLogin():
-    return render_template("login/login.html")
+    return render_template("login/index.html")
 
 
 
