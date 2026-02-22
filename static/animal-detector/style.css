@@ -1,15 +1,44 @@
 #container {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    height: auto;
+    width: 100vw;
+    height: 60vh;
+    padding: 1rem;
+    box-sizing: border-box;
+    justify-content: stretch;
+}
+
+#image-settings {
+    margin-right: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 2;
+    flex-shrink: 0;
+    flex-basis: auto;
+}
+
+.result-box {
+    margin-left: 0.5rem;
+
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-flow: auto;
+    flex-direction: column;
+    padding: 2rem;
+    border-radius: .5rem;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    /* hidden until data arrives */
 }
 
 .file-upload {
     display: flex;
+    flex-shrink: 0;
+    flex-grow: 10;
+    flex-basis: auto;
 
-    margin: 1rem;
-    height: 50vh;
-    width: 50vw;
+    margin-bottom: 0.25rem;
 
     color: #aef5b4;
     background: #0f331e;
@@ -27,29 +56,50 @@
 }
 
 #send {
-    height: 5vh;
+    flex-shrink: 0;
+    flex-grow: 1;
+    flex-basis: auto;
+
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+
+    border-radius: 1rem;
 }
 
-#send-and-results {
-    margin: 1rem;
-    width: 40vw;
+#country {
+    flex-shrink: 0;
+    flex-grow: 1;
+    flex-basis: auto;
+
+    margin-top: 0.25rem;
+
+    border-radius: 1rem;
+}
+
+#state {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+
+    border-radius: 1rem;
+
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: auto;
+}
+
+#state-container {
+    display: flex;
+
+    margin-top: 0.5rem;
+
+    flex-shrink: 0;
+    flex-grow: 1;
+    flex-basis: auto;
 }
 
 #animal-pic-file {
     display: none;
 }
 
-.result-box {
-    padding: 20px;
-    border-radius: 8px;
-    background-color: white;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    display: none;
-    /* hidden until data arrives */
-}
 
 .result-box h3 {
     margin-top: 0;

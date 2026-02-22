@@ -21,7 +21,7 @@ function previewImage() {
 
 countrySelect.addEventListener("change", function () {
     if (countrySelect.value === "USA") {
-        stateContainer.style.display = "block";
+        stateContainer.style.display = "flex";
     } else {
         stateContainer.style.display = "none";
         stateSelect.value = "";
@@ -53,7 +53,7 @@ function upload(file) {
 
             console.log(data);
 
-            document.getElementById("resultBox").style.display = "block";
+            // document.getElementById("resultBox").style.display = "flex";
             document.getElementById("name").textContent = data.name;
             document.getElementById("endangered_status").textContent = data.animal_data.endangered_status;
             document.getElementById("is_invasive").textContent = data.animal_data.is_invasive ? 'Yes ⚠️' : 'No';
