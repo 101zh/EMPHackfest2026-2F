@@ -11,7 +11,9 @@ async function loadAnimals() {
             card.className = 'animal-card';
 
             card.innerHTML = `
-                <img src="data:${animal.image_type};base64,${animal.image}" alt="${animal.name}">
+                <div class="animal-card-image-container">
+                    <img src="data:${animal.image_type};base64,${animal.image}" alt="${animal.name}">
+                </div>
                 <h3>${animal.name}</h3>
             `;
 
@@ -39,6 +41,7 @@ function showDetails(animal) {
             <p><strong>Invasiveness:</strong> ${animal.info.is_invasive ? 'Yes ⚠️' : 'No'}</p>
             <p><strong>Population:</strong> ${animal.info.population_count}</p>
             <p><strong>Native Region:</strong> ${animal.info.native_region}</p>
+            <p><strong>Report Link:</strong> ${animal.info.report_link}</p>
         </div>
         <hr>
         <p><strong>Fun Facts:</strong> ${animal.info.fun_facts}</p>
