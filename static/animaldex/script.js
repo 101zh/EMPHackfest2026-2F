@@ -2,19 +2,19 @@ async function loadAnimals() {
     try {
         const response = await fetch('/animals');
         const animals = await response.json();
-        
+
         const grid = document.querySelector('.pokedex-grid');
         grid.innerHTML = '';
 
         animals.forEach(animal => {
             const card = document.createElement('div');
             card.className = 'animal-card';
-            
+
             card.innerHTML = `
                 <img src="data:${animal.image_type};base64,${animal.image}" alt="${animal.name}">
                 <h3>${animal.name}</h3>
             `;
-            
+
             // Click event for the modal
             card.onclick = () => showDetails(animal);
             grid.appendChild(card);
@@ -27,10 +27,12 @@ async function loadAnimals() {
 function showDetails(animal) {
     const modal = document.getElementById('animalModal');
     const details = document.getElementById('modal-details');
-    
+
     // Fill the modal using your automated "info" object
     details.innerHTML = `
-        <img class="modal-image" src="data:${animal.image_type};base64,${animal.image}" alt="${animal.name}">
+    <div class="modal-image-container">    
+    <img class="modal-image" src="data:${animal.image_type};base64,${animal.image}" alt="${animal.name}">
+    </div>
         <h2>${animal.name}</h2>
         <div class="stats">
             <p><strong>Status:</strong> ${animal.info.endangered_status}</p>
