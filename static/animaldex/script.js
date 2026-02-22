@@ -41,6 +41,7 @@ function showDetails(animal) {
             <p><strong>Invasiveness:</strong> ${animal.info.is_invasive ? 'Yes ⚠️' : 'No'}</p>
             <p><strong>Population:</strong> ${animal.info.population_count}</p>
             <p><strong>Native Region:</strong> ${animal.info.native_region}</p>
+            <p><strong>Report Link:</strong> ${animal.info.report_link}</p>
         </div>
         <hr>
         <p><strong>Fun Facts:</strong> ${animal.info.fun_facts}</p>
