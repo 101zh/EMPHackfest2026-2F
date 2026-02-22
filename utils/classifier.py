@@ -16,7 +16,7 @@ output_file = Path(__file__).parent / "output.json"
   publisher={Wiley Online Library}
 }
 """
-def get_animal(country_code="") :
+def get_animal(country_code="", state_code="") :
     # Delete old output.json (SpeciesNet throws error otherwise)
     if output_file.exists():
         output_file.unlink()
@@ -34,9 +34,16 @@ def get_animal(country_code="") :
         str(image_folder),
         "--predictions_json",
         str(output_file),
-        "--country",
-        country_code # Classifaction based on country
     ]
+
+    if country_code != "":
+        command.append("--country")
+        command.append(country_code)
+    
+    if state_code != "":
+        command.append("--admin1_region")
+        command.append(state_code)
+
 
     print("Running classifier...")
     subprocess.run(command, input="y\n", text=True)

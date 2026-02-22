@@ -139,6 +139,12 @@ def get_animals():
 @app.route("/identify", methods=["POST"])
 def identify_animal():
     file = request.files.get("image")
+    country = request.form.get("country")
+    state = request.form.get("state")
+
+    print(country)
+    print(state)
+
     if file:
         if not os.path.exists("speciesnet-input"):
             os.makedirs("speciesnet-input")
@@ -151,13 +157,12 @@ def identify_animal():
     file.seek(0)
     image_bytes = file.read()
 
-    animal = get_animal()
+    animal = get_animal(country_code=country, state_code=state)
 
     if animal.lower() == "blank":
         return jsonify({"message": "No animal identified"}), 400
 
-    location = "World"
-    info = get_species_information(animal, location)
+    info = get_species_information(animal, country, state)
 
     if info == None:
         return jsonify({"message": "API call failed"}), 400

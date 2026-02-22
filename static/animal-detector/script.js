@@ -1,5 +1,8 @@
 const fileInput = document.getElementById("animal-pic-file");
 const imagePreview = document.getElementById("image-preview");
+const stateContainer = document.getElementById("state-container");
+const stateSelect = document.getElementById("state")
+const countrySelect = document.getElementById("country");
 
 window.addEventListener('paste', e => {
     fileInput.files = e.clipboardData.files;
@@ -16,6 +19,16 @@ function previewImage() {
     }
 }
 
+countrySelect.addEventListener("change", function () {
+    if (countrySelect.value === "USA") {
+        stateContainer.style.display = "block";
+    } else {
+        stateContainer.style.display = "none";
+        stateSelect.value = "";
+    }
+});
+
+
 document.getElementById("send").addEventListener("click", function () {
     if (fileInput.files && fileInput.files[0]) {
         upload(fileInput.files[0]);
@@ -26,6 +39,8 @@ function upload(file) {
     console.log(file)
     var formdata = new FormData();
     formdata.append("image", file);
+    formdata.append("country", countrySelect.value);
+    formdata.append("state", stateSelect.value);
 
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "/identify", true);
@@ -41,10 +56,11 @@ function upload(file) {
             document.getElementById("resultBox").style.display = "block";
             document.getElementById("name").textContent = data.name;
             document.getElementById("endangered_status").textContent = data.animal_data.endangered_status;
-            document.getElementById("is_invasive").textContent = data.animal_data.is_invasive;
+            document.getElementById("is_invasive").textContent = data.animal_data.is_invasive ? 'Yes ⚠️' : 'No';
             document.getElementById("population_count").textContent = data.animal_data.population_count;
             document.getElementById("native_region").textContent = data.animal_data.native_region;
             document.getElementById("fun_facts").textContent = data.animal_data.fun_facts;
+            document.getElementById("report_link").innerHTML = `<a href="${data.animal_data.report_link}" target="_blank">${data.animal_data.report_link}</a>`;
         } else {
             console.error(xhr);
         }

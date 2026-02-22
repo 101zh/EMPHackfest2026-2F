@@ -10,22 +10,29 @@ JSON_KEYS = [
     "population_count",
     "native_region",
     "fun_facts",
+    "report_link",
 ]
 
 MAX_ATTEMPTS = 3
 
 
-def get_species_information(species, location):
+def get_species_information(species, country, state):
     dotenv.load_dotenv()
     client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
+    countryText = ("found in (as ISO 3166-1 Alpha-3) " + country + " ") if country != "" else ""
+    stateText = ("in the state (as ISO 3166-2) " + state + " ") if state != "" else ""
+
     prompt = f"""
-        Briefly tell me about this animal {species} found in {location} in a json format: {{{", ".join(list(f'''"{key}"''' for key in JSON_KEYS))}}}.
+        Briefly tell me about this animal {species} {countryText + stateText}in a json format: {{{", ".join(list(f'''"{key}"''' for key in JSON_KEYS))}}}.
         Use ASCII characters and format as strings without new lines or indentation.
         Make "endangered_status" the string "None" if the species is not listed.
         Make "is_invasive" a boolean, and true if the species is classified as invasive and is in a location where it's not native.
-        Write "fun_facts" in complete sentences.
+        Write "fun_facts" in complete sentences{", and try to make it specific to the given location" if countryText != "" else ""}.
+        Make "report_link" a url to a reporting service (e.g. https://invasivespecies.wa.gov/report-a-sighting/ for invasive species found in Washington) if the animal should reported when spotted at the given location, either because it is endangered or invasive. Leave blank if reporting is unecessary or unadvised.
     """
+
+    print(prompt)
 
     for i in range(MAX_ATTEMPTS):
         try:
