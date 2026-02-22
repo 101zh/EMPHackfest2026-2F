@@ -2,7 +2,8 @@ import base64
 import hashlib
 import io
 import json
-from flask import Flask, jsonify, request, render_template
+import dotenv
+from flask import Flask, jsonify, request, render_template, session
 from utils.gemini_api import get_species_information
 from utils.classifier import get_animal
 from PIL import Image
@@ -11,6 +12,8 @@ import os
 
 
 app = Flask(__name__)
+dotenv.load_dotenv()
+app.secret_key = os.getenv("SECRET_KEY")
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -35,10 +38,10 @@ def animal_detector():
 def animaldex():
     return render_template("animaldex/index.html")
 
+
 @app.route("/login/")
 def loadLogin():
     return render_template("login/index.html")
-
 
 
 @app.route("/init", methods=["GET"])
@@ -95,7 +98,20 @@ def register():
     except sqlite3.IntegrityError:
         conn.close()
         return jsonify({"error": "Username already exists"}), 409
-    
+
+
+@app.route("/user", methods=["GET"])
+def get_logged_in_user():
+    if session.get("username") == None or not session.get("logged_in"):
+        return jsonify({"message": "No user is logged in", "user": "", "flag": False}), 200
+    return jsonify(
+        {
+            "message": f"{session.get("username")} is currently logged in",
+            "user": session.get("username"),
+            "flag": True,
+        }
+    ), 200
+
 
 @app.route("/login", methods=["POST"])
 def login():
@@ -103,8 +119,14 @@ def login():
     username = data.get("username")
     password = data.get("password")
 
+    if session.get("username") == username and session.get("logged_in"):
+        return jsonify({"message": f"{username} already logged in"}), 403
+
     if not username or not password:
-        return jsonify({"message": "Missing username or password", "success": False}), 400
+        return (
+            jsonify({"message": "Missing username or password", "success": False}),
+            400,
+        )
 
     hashed_password = hashlib.sha256(password.encode()).hexdigest()
     conn = get_db()
@@ -115,16 +137,30 @@ def login():
     conn.close()
 
     if user:
+        session["username"] = username
+        session["logged_in"] = True
         return jsonify({"message": f"Welcome {username}!", "success": True}), 200
     else:
         return jsonify({"message": "Invalid credentials", "success": False}), 401
 
 
+@app.route("/logout", methods=["POST"])
+def logout():
+    if session.get("logged_in"):
+        return jsonify({"message": "User already logged out"}), 403
+
+    username = session.get("username")
+    session.clear()
+    return jsonify({"message": f"Logged out {username} successfully!"}), 200
+
 
 @app.route("/animals", methods=["GET"])
 def get_animals():
+    if not session.get("logged_in"):
+        return jsonify({"message": "User not logged in"}), 401
+
     conn = get_db()
-    rows = conn.execute("SELECT * FROM animals").fetchall()
+    rows = conn.execute("SELECT * FROM animals WHERE username = ?", (session.get("username"),)).fetchall()
     conn.close()
 
     animals = []
@@ -139,7 +175,7 @@ def get_animals():
             }
         )
 
-    return jsonify(animals)
+    return jsonify(animals), 200
 
 
 @app.route("/identify", methods=["POST"])
@@ -176,13 +212,14 @@ def identify_animal():
     print(animal)
     print(info)
 
-    conn = get_db()
-    conn.execute(
-        "INSERT INTO animals (name, info, image, image_type, username) VALUES (?, ?, ?, ?, ?)",
-        (animal, json.dumps(info), image_bytes, file.content_type, "temp"),
-    )
-    conn.commit()
-    conn.close()
+    if session.get("logged_in"):
+        conn = get_db()
+        conn.execute(
+            "INSERT INTO animals (name, info, image, image_type, username) VALUES (?, ?, ?, ?, ?)",
+            (animal, json.dumps(info), image_bytes, file.content_type, session.get("username")),
+        )
+        conn.commit()
+        conn.close()
 
     return (
         jsonify({"message": "Animal identified", "name": animal, "animal_data": info}),
