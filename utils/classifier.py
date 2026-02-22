@@ -47,13 +47,10 @@ def get_animal(country_code="") :
         output_json = json.load(json_data)
         json_data.close()
 
-    print(output_json)
-
     # Gets the most confident animal classification data
     classification = output_json["predictions"][0]["classifications"]["classes"][0] 
 
     # Gets the animal predicted from classification data
     animal_predicted = classification.split(";")[-1]
-    print(animal_predicted)
 
-    return animal_predicted
+    return animal_predicted.title()
