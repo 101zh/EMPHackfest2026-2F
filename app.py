@@ -35,6 +35,11 @@ def animal_detector():
 def animaldex():
     return render_template("animaldex/index.html")
 
+@app.route("/login/")
+def loadLogin():
+    return render_template("login/login.html")
+
+
 
 @app.route("/init", methods=["GET"])
 def init_db():
@@ -54,7 +59,7 @@ def init_db():
         """
         CREATE TABLE IF NOT EXISTS users(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        user TEXT UNIQUE NOT NULL,
+        username TEXT UNIQUE NOT NULL,
         password TEXT NOT NULL
         )
         """
