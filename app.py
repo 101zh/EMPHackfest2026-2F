@@ -51,7 +51,8 @@ def init_db():
         name TEXT NOT NULL,
         info TEXT NOT NULL,
         image BLOB NOT NULL,
-        image_type TEXT NOT NULL
+        image_type TEXT NOT NULL,
+        username NOT NULL
         )
         """
     )
@@ -177,8 +178,8 @@ def identify_animal():
 
     conn = get_db()
     conn.execute(
-        "INSERT INTO animals (name, info, image, image_type) VALUES (?, ?, ?, ?)",
-        (animal, json.dumps(info), image_bytes, file.content_type),
+        "INSERT INTO animals (name, info, image, image_type, username) VALUES (?, ?, ?, ?, ?)",
+        (animal, json.dumps(info), image_bytes, file.content_type, "temp"),
     )
     conn.commit()
     conn.close()
