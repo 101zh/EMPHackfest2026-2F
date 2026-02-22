@@ -25,14 +25,26 @@ function upload(file) {
     formdata.append("image", file);
 
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://localhost:5000/identify", true);
+    xhr.open("POST", "/identify", true);
+    xhr.responseType = "json";
     xhr.onload = function () {
-        if (this.status = 200) {
+        
+        if (this.status === 200) {
+            const data = this.response;
             console.log(this.response);
+
+            console.log(data);
+
+            document.getElementById("resultBox").style.display = "block";
+            document.getElementById("name").textContent = data.name;
+            document.getElementById("endangered_status").textContent = data.animal_data.endangered_status;
+            document.getElementById("is_invasive").textContent = data.animal_data.is_invasive;
+            document.getElementById("population_count").textContent = data.animal_data.population_count;
+            document.getElementById("native_region").textContent = data.animal_data.native_region;
+            document.getElementById("fun_facts").textContent = data.animal_data.fun_facts;
         } else {
             console.error(xhr);
         }
-        alert(this.response);
     };
     xhr.send(formdata);
 }

@@ -1,0 +1,13 @@
+.result-box {
+    width: 320px;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: none; /* hidden until data arrives */
+}
+
+.result-box h3 {
+    margin-top: 0;
+}
