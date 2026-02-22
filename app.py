@@ -25,11 +25,6 @@ def home():
     return render_template("index.html")
 
 
-@app.route("/mission/")
-def mission():
-    return render_template("mission/index.html")
-
-
 @app.route("/animal-detector/")
 def animal_detector():
     return render_template("animal-detector/index.html")
