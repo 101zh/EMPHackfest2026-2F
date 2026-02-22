@@ -1,13 +1,18 @@
-#image-preview-container {
+.file-upload {
+    display: flex;
+
+    margin: 1rem;
     height: 20rem;
     width: 20rem;
-    margin: 1rem;
-    display: flex;
-}
 
-.file-upload {
-    height: 100%;
-    width: 100%;
+    color: #aef5b4;
+    background: #0f331e;
+    border-radius: 1rem;
+    border: solid 0.2rem;
+    border-color: #23000f;
+
+    justify-content: center;
+    align-items: center;
 }
 
 .file-upload:hover {
