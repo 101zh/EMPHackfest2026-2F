@@ -146,7 +146,7 @@ def login():
 
 @app.route("/logout", methods=["POST"])
 def logout():
-    if session.get("logged_in"):
+    if not session.get("logged_in"):
         return jsonify({"message": "User already logged out"}), 403
 
     username = session.get("username")
