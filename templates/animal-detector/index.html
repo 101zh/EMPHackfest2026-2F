@@ -21,7 +21,7 @@
                 src="{{ url_for('static', filename='assets/logo.svg') }}" alt="Paw Image"></a>
         <a class="navButton" href="../animaldex/">AnimalDex</a>
         <a class="navButton" href="../animal-detector/">Animal Detector</a>
-        <a class="navButton" href="../login/">Login</a>
+        <a class="navButton" id="userNavButton" href="../login/">Login</a>
     </nav>
 
     <div class="header">
@@ -361,5 +361,6 @@
 </body>
 
 <script src="{{ url_for('static', filename='animal-detector/script.js') }}"></script>
+<script src="{{ url_for('static', filename='navbar-user.js') }}"></script>
 
 </html>

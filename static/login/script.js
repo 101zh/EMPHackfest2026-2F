@@ -54,6 +54,12 @@ async function submitAuth(event) {
         loginMessage.textContent = data.message || data.error || "Request completed.";
         loginMessage.className = ok ? "login-message success" : "login-message error";
 
+        // If login is successful update the navbar
+        if (ok && mode === "login" && typeof updateNavBar === "function") {
+            updateNavBar(username);
+        }
+
+        // If registration is successful, switch to login mode
         if (ok && mode === "register") {
             setMode("login");
         }
