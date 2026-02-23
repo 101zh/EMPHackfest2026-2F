@@ -6,6 +6,7 @@ const countrySelect = document.getElementById("country");
 
 window.addEventListener('paste', e => {
     fileInput.files = e.clipboardData.files;
+    previewImage()
 });
 
 fileInput.onchange = previewImage;

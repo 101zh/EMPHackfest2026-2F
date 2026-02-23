@@ -2,7 +2,7 @@
     display: flex;
     height: auto;
     width: 100vw;
-    height: 60vh;
+    /* height: 60vh; */
     padding: 1rem;
     box-sizing: border-box;
     justify-content: stretch;
@@ -19,6 +19,8 @@
 
 .result-box {
     margin-left: 0.5rem;
+
+    max-width: 40vw;
 
     display: flex;
     flex-grow: 1;
@@ -103,4 +105,8 @@
 
 .result-box h3 {
     margin-top: 0;
+}
+
+.result-item{
+    overflow-wrap: break-word;
 }
