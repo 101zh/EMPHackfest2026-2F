@@ -2,7 +2,7 @@
     display: flex;
     height: auto;
     width: 100vw;
-    /* height: 60vh; */
+    min-height: 55vh;
     padding: 1rem;
     box-sizing: border-box;
     justify-content: stretch;
