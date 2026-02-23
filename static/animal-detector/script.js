@@ -4,6 +4,26 @@ const stateContainer = document.getElementById("state-container");
 const stateSelect = document.getElementById("state")
 const countrySelect = document.getElementById("country");
 
+const waitingFacts = [
+    "Octopuses have three hearts.",
+    "A group of flamingos is called a flamboyance.",
+    "Sea otters hold hands while they sleep.",
+    "Some turtles can breathe through their rear ends.",
+    "Crows can recognize human faces.",
+    "A shrimp's heart is in its head.",
+    "The immortal jellyfish can hit a 'reset' button and revert to its polyp stage.",
+    "Wombats are the only animals that produce cube-shaped poop.",
+    "A blue whale's heart is the size of a bumper car.",
+    "Honeybees perform a 'waggle dance' to communicate the location of flowers.",
+    "Cows have 'best friends' and get stressed when separated from them.",
+    "Sloths can hold their breath underwater for up to 40 minutes.",
+    "Platypuses do not have stomachs; their esophagus connects directly to their intestines.",
+    "Hummingbirds have a heart rate that can reach 1,260 beats per minute."
+];
+
+let loadingFactInterval = null;
+let loadingFactIndex = 0;
+
 window.addEventListener('paste', e => {
     fileInput.files = e.clipboardData.files;
     previewImage()
@@ -36,8 +56,36 @@ document.getElementById("send").addEventListener("click", function () {
     }
 });
 
+function startLoadingState() {
+    if (loadingFactInterval) {
+        clearInterval(loadingFactInterval);
+    }
+
+    loadingFactIndex = 0;
+    document.getElementById("loadingFact").textContent = waitingFacts[loadingFactIndex];
+    loadingFactInterval = setInterval(() => {
+        loadingFactIndex = (loadingFactIndex + 1) % waitingFacts.length;
+        document.getElementById("loadingFact").textContent = waitingFacts[loadingFactIndex];
+    }, 2200);
+
+    document.getElementById("send").disabled = true;
+    document.getElementById("loadingBox").style.display = "flex";
+    document.getElementById("resultBox").style.display = "none";
+}
+
+function stopLoadingState() {
+    if (loadingFactInterval) {
+        clearInterval(loadingFactInterval);
+        loadingFactInterval = null;
+    }
+
+    document.getElementById("send").disabled = false;
+    document.getElementById("loadingBox").style.display = "none";
+}
+
 function upload(file) {
     console.log(file)
+    startLoadingState();
     var formdata = new FormData();
     formdata.append("image", file);
     formdata.append("country", countrySelect.value);
@@ -47,6 +95,7 @@ function upload(file) {
     xhr.open("POST", "/identify", true);
     xhr.responseType = "json";
     xhr.onload = function () {
+        stopLoadingState();
 
         if (this.status === 200) {
             const data = this.response;
@@ -54,7 +103,7 @@ function upload(file) {
 
             console.log(data);
 
-            // document.getElementById("resultBox").style.display = "flex";
+            document.getElementById("resultBox").style.display = "flex";
             document.getElementById("name").textContent = data.name;
             document.getElementById("endangered_status").textContent = data.animal_data.endangered_status;
             document.getElementById("is_invasive").textContent = data.animal_data.is_invasive ? 'Yes ⚠️' : 'No';
@@ -65,6 +114,10 @@ function upload(file) {
         } else {
             console.error(xhr);
         }
+    };
+    xhr.onerror = function () {
+        stopLoadingState();
+        console.error(xhr);
     };
     xhr.send(formdata);
 }
